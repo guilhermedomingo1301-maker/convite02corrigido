@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite de Casamento & RSVP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="card hero">
+            <p class="small">Convite de Casamento</p>
+            <h1>Guilherme & Rita</h1>
+            <p class="subtitle">oi</p>
+        </div>
+
+        <div class="card">
+            <h2>Confirmação de Presença</h2>
+            <p class="text">Por favor, confirme sua presença até <strong>30/09/2026</strong>.</p>
+            
+            <div id="mensagem-encerrado" class="hidden text" style="color: #a83232; margin-top: 14px; font-weight: bold;">
+                O prazo para confirmação de presença infelizmente já se encerrou.
+            </div>
+
+            <form id="form-rsvp">
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" placeholder="Ex: Maria Silva" required>
+
+                <label for="telefone">Telefone / WhatsApp</label>
+                <input type="tel" id="telefone" placeholder="Ex: (82) 99999-9999" required>
+
+                <label for="acompanhantes">Quantidade de acompanhantes (além de você)</label>
+                <select id="acompanhantes">
+                    <option value="0">Nenhum</option>
+                    <option value="1">1 acompanhante</option>
+                    <option value="2">2 acompanhantes</option>
+                    <option value="3">3 acompanhantes</option>
+                </select>
+
+                <button type="submit" id="btn-confirmar">Confirmar Presença</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
