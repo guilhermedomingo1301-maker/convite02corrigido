@@ -1,48 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Convite de Casamento & RSVP</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de Presentes - Rita & Guilherme</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <main class="container">
+    <section class="card hero">
+      <p class="small">Lista de Presentes</p>
+      <h1>Rita & Guilherme </h1>
+    </section>
 
-    <div class="container">
-        <div class="card hero">
-            <p class="small">Convite de Casamento</p>
-            <h1>Rita & Guilherme</h1>
-            <p class="subtitle">Agradecemos de coração pelo carinho, e por fazer parte desse capítulo tão especial das nossas vidas. ❤️</p>
+
+    <section class="card">
+      <h2>Lista de Presentes (Referências)</h2>
+      <p class="text">Preparamos esta vitrine para servir de referência do que gostaríamos para o nosso novo lar. Você pode visualizar os modelos e nos ajudar contribuindo com o valor gerando um Pix abaixo!</p>
+      
+      <div class="filters">
+        <button class="filter-btn active" data-category="all">Todos</button>
+        <button class="filter-btn" data-category="cozinha">Cozinha</button>
+        <button class="filter-btn" data-category="sala">Sala</button>
+        <button class="filter-btn" data-category="eletro">Eletro</button>
+      </div>
+
+      <div class="products-grid" id="products-grid">
         </div>
+    </section>
 
-        <div class="card">
-            <h2>Confirmação de Presença</h2>
-            <p class="text">Por favor, confirme sua presença até <strong>30/09/2026</strong>.</p>
-            
-            <div id="mensagem-encerrado" class="hidden text" style="color: #a83232; margin-top: 14px; font-weight: bold;">
-                O prazo para confirmação de presença infelizmente já se encerrou.
-            </div>
+    <section class="card" id="pix-section">
+      <h2>Contribuir com Pix</h2>
+      <p class="text">Escolha um valor ou clique em um item da vitrine acima para transferir o valor do presente desejado:</p>
 
-            <form id="form-rsvp">
-                <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" placeholder="Ex: Maria Silva" required>
+      <div class="valores">
+        <button onclick="selecionarValor(120)">R$ 120</button>
+        <button onclick="selecionarValor(150)">R$ 150</button>
+        <button onclick="selecionarValor(200)">R$ 200</button>
+        <button onclick="selecionarValor(250)">R$ 250</button>
+      </div>
 
-                <label for="telefone">Telefone / WhatsApp</label>
-                <input type="tel" id="telefone" placeholder="Ex: (82) 99999-9999" required>
+      <label>Valor livre</label>
+      <input id="valorLivre" type="number" placeholder="Digite outro valor ou o valor do item" />
+      <button onclick="usarValorLivre()">Gerar Pix</button>
 
-                <label for="acompanhantes">Quantidade de acompanhantes (além de você)</label>
-                <select id="acompanhantes">
-                    <option value="0">Nenhum</option>
-                    <option value="1">1 acompanhante</option>
-                    <option value="2">2 acompanhantes</option>
-                    <option value="3">3 acompanhantes</option>
-                </select>
+      <label>Escolha a chave Pix</label>
+      <select id="chavePix">
+        <option value="a4094d9c-fa16-4ec4-bbab-24322b280c4a">Chave aleatória</option>
+      </select>
 
-                <button type="submit" id="btn-confirmar">Confirmar Presença</button>
-            </form>
-        </div>
+      <div id="pixArea" class="pix-area hidden">
+        <h3>Pix gerado</h3>
+        <div id="qrcode"></div>
+        <textarea id="pixCopiaCola" readonly></textarea>
+        <button onclick="copiarPix()">Copiar código Pix</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="gift-modal">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <div id="modal-icon-container" style="font-size: 4rem; text-align: center; margin-bottom: 10px;"></div>
+      <h2 id="modal-title">Nome do Produto</h2>
+      <p class="modal-category" id="modal-category">Categoria</p>
+      <p id="modal-description" class="text" style="margin-bottom: 20px;">Descrição detalhada do item.</p>
+      
+      <button id="modal-contribute-btn" class="secondary">Contribuir com este item</button>
     </div>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
