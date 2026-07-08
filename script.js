@@ -1,44 +1,277 @@
-// CONFIGURAÇÃO DA DATA LIMITE (Ano, Mês [0-11], Dia, Hora, Minuto)
-// Janeiro = 0, Novembro = 10, Dezembro = 11
-const DATA_LIMITE = new Date(2026, 9, 30, 23, 59, 59); 
+:root {
+  --color-50: #F1F4F0;
+  --color-100: #D8E1D6;
+  --color-200: #C0CDBC;
+  --color-300: #A7BAA1;
+  --color-400: #8EA687;
+  --color-500: #75936C;
+  --color-600: #607859;
+  --color-700: #4B5E45;
+  --color-800: #364332;
+  --color-900: #21291E;
+  --color-950: #0C0F0B;
 
-// Dados de envio do WhatsApp
-const WHATSAPP_NUMERO = "5582988369610";
+  --cream-50: #FDF7E8;
+  --cream-100: #F9EBC7;
+}
 
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("form-rsvp");
-    const mensagemEncerrado = document.getElementById("mensagem-encerrado");
-    const btnConfirmar = document.getElementById("btn-confirmar");
-    const dataAtual = new Date();
+* {
+  box-sizing: border-box;
+}
 
-    // Verifica se a data atual passou do prazo
-    if (dataAtual > DATA_LIMITE) {
-        form.classList.add("hidden");
-        mensagemEncerrado.classList.remove("hidden");
-    }
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg, var(--cream-50), var(--color-100));
+  color: var(--color-900);
+}
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
+.container {
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
+  padding: 5px;
+}
 
-        if (new Date() > DATA_LIMITE) {
-            alert("O prazo para esta confirmação já expirou.");
-            form.classList.add("hidden");
-            mensagemEncerrado.classList.remove("hidden");
-            return;
-        }
+.card {
+  background: rgba(253, 247, 232, 0.92);
+  border: 1px solid var(--color-200);
+  border-radius: 24px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 30px rgba(33, 41, 30, 0.12);
+}
 
-        const nome = document.getElementById("nome").value;
-        const telefone = document.getElementById("telefone").value;
-        const acompanhantes = document.getElementById("acompanhantes").value;
+.hero {
+  text-align: center;
+  padding: 48px 28px;
+}
 
-        let mensagem = `*Confirmação de Presença - Casamento* 💍\n\n`;
-        mensagem += `Olá Guilherme, gostaria de confirmar minha presença no casamento.\n\n`;
-        mensagem += `👤 *Nome:* ${nome}\n`;
-        mensagem += `📞 *Telefone:* ${telefone}\n`;
-        mensagem += `👥 *Acompanhantes adicionais:* ${acompanhantes}\n\n`;
-        mensagem += `_Enviado via link de confirmação digital._`;
+.small {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-600);
+  font-size: 14px;
+}
 
-        const urlWhatsApp = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMERO}&text=${encodeURIComponent(mensagem)}`;
-        window.open(urlWhatsApp, '_blank');
-    });
-});
+h1 {
+  font-size: 48px;
+  margin: 12px 0;
+  color: var(--color-800);
+}
+
+h2, h3 {
+  color: var(--color-800);
+  margin-bottom: 12px;
+}
+
+.subtitle, .text {
+  color: var(--color-700);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  color: var(--color-800);
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--color-300);
+  border-radius: 14px;
+  background: white;
+  font-size: 16px;
+  color: var(--color-900);
+}
+
+textarea {
+  height: 130px;
+  resize: none;
+  margin-top: 16px;
+}
+
+button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: var(--color-700);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: var(--color-800);
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background: var(--color-500);
+}
+.secondary:hover {
+  background: var(--color-600);
+}
+
+.valores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background-color: var(--cream-100);
+  border: 1px solid var(--color-300);
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: var(--color-800);
+  font-size: 13px;
+  font-weight: 600;
+  width: auto;
+  margin-top: 0;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background-color: var(--color-500);
+  color: white;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.product-card {
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-100);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.product-image {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.product-category {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--color-500);
+  font-weight: bold;
+}
+
+.product-title {
+  font-size: 14px;
+  color: var(--color-900);
+  margin: 8px 0 12px 0;
+  flex-grow: 1;
+}
+
+.view-btn {
+  padding: 8px;
+  font-size: 13px;
+  border-radius: 10px;
+  margin-top: auto;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 24px;
+  max-width: 450px;
+  width: 100%;
+  position: relative;
+  border-top: 8px solid var(--color-500);
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-400);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.modal-category {
+  color: var(--color-500);
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.pix-area {
+  margin-top: 24px;
+  text-align: center;
+}
+
+#qrcode {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.acompanhante {
+  margin-top: 10px;
+}
+
+@media (max-width: 520px) {
+  h1 { font-size: 38px; }
+  .valores { grid-template-columns: 1fr; }
+  .container { padding: 14px; }
+  .products-grid { grid-template-columns: 1fr 1fr; }
+}
